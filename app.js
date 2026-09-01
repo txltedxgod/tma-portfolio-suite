@@ -62,8 +62,8 @@ function toast(message) {
   clearTimeout(toast.timer); toast.timer = setTimeout(() => el.classList.remove('show'), 2200);
 }
 
-function pageHero(eyebrow, title, subtitle, badge = '07', badgeText = 'APPS') {
-  return `<section class="hero"><div><p class="eyebrow">${eyebrow}</p><h1>${title}</h1><p>${subtitle}</p></div><div class="hero-badge"><div><b>${badge}</b><small>${badgeText}</small></div></div></section>`;
+function pageHero(eyebrow, title, subtitle) {
+  return `<section class="hero"><div><p class="eyebrow">${eyebrow}</p><h1>${title}</h1><p>${subtitle}</p></div></section>`;
 }
 
 const appCards = [
