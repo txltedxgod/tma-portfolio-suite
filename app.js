@@ -140,6 +140,127 @@ function playChime(success = true) {
   } catch {}
 }
 
+/* ─── Auditory Tactile UI Micro-Tick ─── */
+function playUiTick() {
+  try {
+    const ctx = getAudioCtx();
+    const t0 = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(1350, t0);
+    osc.frequency.exponentialRampToValueAtTime(450, t0 + 0.018);
+    gain.gain.setValueAtTime(0.04, t0);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.018);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(t0);
+    osc.stop(t0 + 0.02);
+  } catch {}
+}
+
+/* ─── Fluid Number Counter Animation ─── */
+function animateNumber(element, endVal, suffix = '', prefix = '', duration = 650) {
+  if (!element) return;
+  const target = parseFloat(endVal) || 0;
+  const start = 0;
+  const t0 = performance.now();
+  const update = now => {
+    const p = Math.min(1, (now - t0) / duration);
+    const ease = 1 - Math.pow(1 - p, 3);
+    const cur = Math.round(start + (target - start) * ease);
+    element.textContent = `${prefix}${fmt(cur)}${suffix}`;
+    if (p < 1) requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+}
+
+/* ─── Ambient Cosmic Particle Dust ─── */
+function initAmbientCanvas() {
+  const canvas = $('#ambient-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let w = canvas.width = window.innerWidth;
+  let h = canvas.height = window.innerHeight;
+  const colors = ['#00f2fe', '#7928ca', '#10b981', '#f59e0b'];
+  const particles = Array.from({ length: 32 }, () => ({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    vx: (Math.random() - 0.5) * 0.45,
+    vy: (Math.random() - 0.5) * 0.45,
+    r: 1 + Math.random() * 2,
+    c: colors[Math.floor(Math.random() * colors.length)],
+    a: 0.18 + Math.random() * 0.38
+  }));
+
+  window.addEventListener('resize', () => {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  });
+
+  let mx = -1000, my = -1000;
+  window.addEventListener('pointermove', e => {
+    mx = e.clientX;
+    my = e.clientY;
+  });
+
+  function loop() {
+    if (document.hidden) {
+      requestAnimationFrame(loop);
+      return;
+    }
+    ctx.clearRect(0, 0, w, h);
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0) p.x = w;
+      if (p.x > w) p.x = 0;
+      if (p.y < 0) p.y = h;
+      if (p.y > h) p.y = 0;
+
+      const dx = mx - p.x;
+      const dy = my - p.y;
+      const d = Math.sqrt(dx * dx + dy * dy);
+      if (d < 110) {
+        p.x -= (dx / d) * 1.8;
+        p.y -= (dy / d) * 1.8;
+      }
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.c;
+      ctx.globalAlpha = p.a;
+      ctx.fill();
+    }
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+}
+
+/* ─── 3D Card Parallax & Dynamic Spotlight ─── */
+function attachCard3DEffects() {
+  $$('.app-card').forEach(card => {
+    card.onpointermove = e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+      const cx = rect.width / 2;
+      const cy = rect.height / 2;
+      const rx = -((y - cy) / cy) * 8.5;
+      const ry = ((x - cx) / cx) * 8.5;
+      card.style.transform = `perspective(750px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateY(-6px) scale3d(1.02, 1.02, 1)`;
+    };
+    card.onpointerleave = () => {
+      card.style.transform = '';
+      card.style.setProperty('--mouse-x', '-500px');
+      card.style.setProperty('--mouse-y', '-500px');
+    };
+  });
+}
+
 /* ─── Web Speech API Pronunciation ─── */
 function speakWord(text, speechLang = 'en-US') {
   try {
@@ -252,6 +373,7 @@ function renderHome() {
       </a>`).join('')}
     </section>
   </div>`;
+  attachCard3DEffects();
 }
 
 /* ─── 1. Meditation & Breathwork ─── */
@@ -1345,6 +1467,18 @@ function applyStaticI18n() {
   document.documentElement.lang = lang === 'ua' ? 'uk' : lang;
 }
 
+document.addEventListener('pointerdown', e => {
+  if (e.target.closest('button, a, .chip, .quiz-answer, .answer, .property, .market-row, .hour, .sound-toggle')) {
+    playUiTick();
+  }
+  const ripple = document.createElement('span');
+  ripple.className = 'click-shockwave';
+  ripple.style.left = `${e.clientX}px`;
+  ripple.style.top = `${e.clientY}px`;
+  document.body.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 450);
+});
+
 document.addEventListener('click', e => {
   const link = e.target.closest('a[data-link]');
   if (link) {
@@ -1367,4 +1501,5 @@ window.addEventListener('popstate', () => navigate(getCurrentRoute(), false));
 window.addEventListener('hashchange', () => navigate(getCurrentRoute(), false));
 
 applyStaticI18n();
+initAmbientCanvas();
 navigate(getCurrentRoute(), false);
