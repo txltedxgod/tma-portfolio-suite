@@ -267,6 +267,27 @@ h3 { margin-bottom: 7px; font-size: 15px; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 .empty { padding: 40px 20px; text-align: center; color: var(--muted); }
 
+/* Real-time Enhancements */
+.city-presets { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.speaker-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border); background: rgba(255,255,255,.08); display: inline-grid; place-items: center; cursor: pointer; transition: transform .15s ease, background .15s ease; font-size: 18px; }
+.speaker-btn:hover { background: rgba(255,255,255,.18); transform: scale(1.08); }
+.speaker-btn:active { transform: scale(.95); }
+
+.flash-up { animation: flashGreen .7s ease; }
+.flash-down { animation: flashRed .7s ease; }
+@keyframes flashGreen { 0% { background: rgba(16,185,129,.35); color: #6ee7b7; } 100% { background: transparent; } }
+@keyframes flashRed { 0% { background: rgba(251,113,133,.35); color: #fda4af; } 100% { background: transparent; } }
+
+.wallet-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding: 14px 18px; border-radius: 14px; background: rgba(255,255,255,.04); border: 1px solid var(--border); margin-bottom: 14px; }
+.wallet-balance { font-size: 13px; color: var(--muted); }
+.wallet-balance b { font-size: 17px; color: #fff; margin-left: 6px; }
+
+.mortgage-box { margin-top: 16px; padding: 16px; border-radius: 14px; background: rgba(255,255,255,.03); border: 1px solid var(--border); }
+.calc-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; margin-bottom: 8px; }
+.calc-row b { font-size: 14px; color: var(--cyan); }
+
+#confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
+
 @media (max-width: 880px) {
   .app-card, .app-card.wide { grid-column: span 6; }
   .meditation-layout, .language-layout { grid-template-columns: 1fr; }
