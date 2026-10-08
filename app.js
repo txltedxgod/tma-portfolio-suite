@@ -238,28 +238,6 @@ function initAmbientCanvas() {
   requestAnimationFrame(loop);
 }
 
-/* ─── 3D Card Parallax & Dynamic Spotlight ─── */
-function attachCard3DEffects() {
-  $$('.app-card').forEach(card => {
-    card.onpointermove = e => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      card.style.setProperty('--mouse-x', `${x}px`);
-      card.style.setProperty('--mouse-y', `${y}px`);
-      const cx = rect.width / 2;
-      const cy = rect.height / 2;
-      const rx = -((y - cy) / cy) * 8.5;
-      const ry = ((x - cx) / cx) * 8.5;
-      card.style.transform = `perspective(750px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateY(-6px) scale3d(1.02, 1.02, 1)`;
-    };
-    card.onpointerleave = () => {
-      card.style.transform = '';
-      card.style.setProperty('--mouse-x', '-500px');
-      card.style.setProperty('--mouse-y', '-500px');
-    };
-  });
-}
 
 /* ─── Web Speech API Pronunciation ─── */
 function speakWord(text, speechLang = 'en-US') {
@@ -373,7 +351,6 @@ function renderHome() {
       </a>`).join('')}
     </section>
   </div>`;
-  attachCard3DEffects();
 }
 
 /* ─── 1. Meditation & Breathwork ─── */
