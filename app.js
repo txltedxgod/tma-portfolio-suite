@@ -11,13 +11,13 @@ const $$ = (s, root = document) => [...root.querySelectorAll(s)];
 const app = $('#app');
 const modalRoot = $('#modal-root');
 let cleanup = () => {};
-let lang = localStorage.getItem('obsidian-lang') || tg?.initDataUnsafe?.user?.language_code?.slice(0, 2) || 'ru';
+let lang = localStorage.getItem('tma-lang') || tg?.initDataUnsafe?.user?.language_code?.slice(0, 2) || 'ru';
 if (!['ru', 'en', 'ua'].includes(lang)) lang = 'ru';
 
 const I18N = {
   ru: {
     live:'LIVE', navMeditation:'Дыхание', navWeather:'Погода', navCrypto:'Крипто', navLanguage:'Слова', navEstate:'Недвижимость', navQuiz:'Квиз', navP2p:'P2P',
-    suite:'PORTFOLIO SUITE', homeTitle:'7 мини‑аппов. Одна система.', homeSub:'Коллекция мобильных Telegram‑продуктов с единой Obsidian Glass дизайн‑системой.', explore:'Открыть приложение', premium:'PREMIUM',
+    suite:'PORTFOLIO SUITE', homeTitle:'7 мини‑аппов. Одна система.', homeSub:'Коллекция мобильных Telegram‑продуктов с единой темной дизайн‑системой.', explore:'Открыть приложение', premium:'PREMIUM',
     meditation:'Медитация', meditationSub:'Дышите глубже. Возвращайтесь к себе.', weather:'Погода', weatherSub:'Чистый прогноз без визуального шума.', crypto:'Crypto Tracker', cryptoSub:'Рынок, конвертер и портфель в одном экране.', language:'Language Teacher', languageSub:'Учите слова короткими ежедневными сессиями.', estate:'Недвижимость', estateSub:'Премиальные объекты и запись на просмотр.', quiz:'Интерактивный квиз', quizSub:'15 секунд. Четыре варианта. Один ответ.', p2p:'P2P Swap', p2pSub:'Быстрые сделки с понятным escrow‑сценарием.',
     techniques:'Техники', sounds:'Фоновые звуки', sessions:'Сессии', minutes:'Минуты', streak:'Стрик', start:'Начать', pause:'Пауза', reset:'Сбросить', breatheIn:'Вдох', hold:'Задержка', breatheOut:'Выдох', ready:'Готовы?', volume:'Громкость', rain:'Дождь', fire:'Костёр', forest:'Лес', ocean:'Ночной океан',
     cityPlaceholder:'Найти город', feels:'Ощущается', humidity:'Влажность', wind:'Ветер', sunrise:'Рассвет', sunset:'Закат', hourly:'24 часа', week:'7 дней', demoData:'Демо‑прогноз',
@@ -29,7 +29,7 @@ const I18N = {
   },
   en: {
     live:'LIVE', navMeditation:'Breathe', navWeather:'Weather', navCrypto:'Crypto', navLanguage:'Words', navEstate:'Property', navQuiz:'Quiz', navP2p:'P2P',
-    suite:'PORTFOLIO SUITE', homeTitle:'7 mini apps. One system.', homeSub:'A mobile Telegram product collection united by the Obsidian Glass design system.', explore:'Open app', premium:'PREMIUM',
+    suite:'PORTFOLIO SUITE', homeTitle:'7 mini apps. One system.', homeSub:'A mobile Telegram product collection with a unified dark design system.', explore:'Open app', premium:'PREMIUM',
     meditation:'Meditation', meditationSub:'Breathe deeper. Return to yourself.', weather:'Weather', weatherSub:'A clear forecast without visual noise.', crypto:'Crypto Tracker', cryptoSub:'Market, converter and portfolio in one view.', language:'Language Teacher', languageSub:'Learn words in short daily sessions.', estate:'Real Estate', estateSub:'Premium properties and instant viewing requests.', quiz:'Interactive Quiz', quizSub:'15 seconds. Four choices. One answer.', p2p:'P2P Swap', p2pSub:'Fast trades with a transparent escrow flow.',
     techniques:'Techniques', sounds:'Ambient sounds', sessions:'Sessions', minutes:'Minutes', streak:'Streak', start:'Start', pause:'Pause', reset:'Reset', breatheIn:'Inhale', hold:'Hold', breatheOut:'Exhale', ready:'Ready?', volume:'Volume', rain:'Rain', fire:'Fire', forest:'Forest', ocean:'Night ocean',
     cityPlaceholder:'Search city', feels:'Feels like', humidity:'Humidity', wind:'Wind', sunrise:'Sunrise', sunset:'Sunset', hourly:'24 hours', week:'7 days', demoData:'Demo forecast',
@@ -41,7 +41,7 @@ const I18N = {
   },
   ua: {
     live:'LIVE', navMeditation:'Дихання', navWeather:'Погода', navCrypto:'Крипто', navLanguage:'Слова', navEstate:'Нерухомість', navQuiz:'Квіз', navP2p:'P2P',
-    suite:'PORTFOLIO SUITE', homeTitle:'7 мініапів. Одна система.', homeSub:'Колекція мобільних Telegram‑продуктів з єдиною дизайн‑системою Obsidian Glass.', explore:'Відкрити застосунок', premium:'PREMIUM',
+    suite:'PORTFOLIO SUITE', homeTitle:'7 мініапів. Одна система.', homeSub:'Колекція мобільних Telegram‑продуктів з єдиною темною дизайн‑системою.', explore:'Відкрити застосунок', premium:'PREMIUM',
     meditation:'Медитація', meditationSub:'Дихайте глибше. Повертайтеся до себе.', weather:'Погода', weatherSub:'Чистий прогноз без візуального шуму.', crypto:'Crypto Tracker', cryptoSub:'Ринок, конвертер і портфель на одному екрані.', language:'Language Teacher', languageSub:'Вивчайте слова короткими щоденними сесіями.', estate:'Нерухомість', estateSub:'Преміальні об’єкти та запис на перегляд.', quiz:'Інтерактивний квіз', quizSub:'15 секунд. Чотири варіанти. Одна відповідь.', p2p:'P2P Swap', p2pSub:'Швидкі угоди зі зрозумілим escrow‑сценарієм.',
     techniques:'Техніки', sounds:'Фонові звуки', sessions:'Сесії', minutes:'Хвилини', streak:'Серія', start:'Почати', pause:'Пауза', reset:'Скинути', breatheIn:'Вдих', hold:'Затримка', breatheOut:'Видих', ready:'Готові?', volume:'Гучність', rain:'Дощ', fire:'Багаття', forest:'Ліс', ocean:'Нічний океан',
     cityPlaceholder:'Знайти місто', feels:'Відчувається', humidity:'Вологість', wind:'Вітер', sunrise:'Світанок', sunset:'Захід', hourly:'24 години', week:'7 днів', demoData:'Демо‑прогноз',
@@ -259,7 +259,7 @@ document.addEventListener('click',e=>{
 
 $$('[data-lang]').forEach(b=>b.onclick=()=>{
   lang=b.dataset.lang;
-  localStorage.setItem('obsidian-lang',lang);
+  localStorage.setItem('tma-lang',lang);
   applyStaticI18n();
   navigate(getCurrentRoute(),false);
 });

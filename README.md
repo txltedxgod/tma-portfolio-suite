@@ -8,7 +8,7 @@
 [![Web3 Payments](https://img.shields.io/badge/Crypto-CryptoBot_·_xRocket_·_Stars-F59E0B?style=for-the-badge&logo=bitcoin&logoColor=white)](https://t.me/CryptoBot)
 [![License: MIT](https://img.shields.io/badge/License-MIT-10B981?style=for-the-badge)](LICENSE)
 
-### 💎 Production-Grade Obsidian Glass Telegram Mini Apps (TMA) Suite
+### 💎 Production-Grade Telegram Mini Apps (TMA) Suite
 **7 Complete WebApps · Web Audio API · Haptic Feedback Engine · Universal Router · Multilingual RU/EN/UA**
 
 [👉 **EXPLORE LIVE INTERACTIVE DEMO** 👈](https://txltedxgod.github.io/tma-portfolio-suite/)
@@ -58,7 +58,7 @@ This suite is architected for instant plug-and-play integration with Telegram's 
 
 ## 🎨 Design System & Architecture
 
-- **Obsidian Glass Aesthetics**: Deep dark background (`#08090C`), frosted glass cards (`backdrop-filter: blur(24px)`), subtle neon glow accents (`#00f2fe`, `#7928ca`, `#10b981`).
+- **Dark Glassmorphism Aesthetics**: Deep dark background (`#08090C`), frosted glass cards (`backdrop-filter: blur(24px)`), subtle neon glow accents (`#00f2fe`, `#7928ca`, `#10b981`).
 - **Telegram Native UX**:
   - Seamless full-screen expansion (`Telegram.WebApp.expand()`).
   - Haptic Feedback integration (`Telegram.WebApp.HapticFeedback.impactOccurred('light' | 'medium')`).
