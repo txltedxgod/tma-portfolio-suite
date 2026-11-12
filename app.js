@@ -2,8 +2,8 @@ const tg = window.Telegram?.WebApp;
 if (tg) {
   tg.ready?.();
   tg.expand?.();
-  tg.setHeaderColor?.('#08090c');
-  tg.setBackgroundColor?.('#08090c');
+  tg.setHeaderColor?.('#09090b');
+  tg.setBackgroundColor?.('#09090b');
   tg.BackButton?.onClick?.(() => {
     haptic('light');
     navigate('/');
@@ -182,7 +182,7 @@ function initAmbientCanvas() {
   const ctx = canvas.getContext('2d');
   let w = canvas.width = window.innerWidth;
   let h = canvas.height = window.innerHeight;
-  const colors = ['#00f2fe', '#7928ca', '#10b981', '#f59e0b'];
+  const colors = ['rgba(255,255,255,0.65)', 'rgba(212,212,216,0.55)', 'rgba(161,161,170,0.45)'];
   const particles = Array.from({ length: 32 }, () => ({
     x: Math.random() * w,
     y: Math.random() * h,
@@ -277,7 +277,7 @@ function getConfetti() {
 
 function fireConfetti(count = 70) {
   const { canvas, ctx } = getConfetti();
-  const colors = ['#00f2fe', '#4facfe', '#7928ca', '#f59e0b', '#10b981', '#f43f5e', '#a78bfa', '#facc15'];
+  const colors = ['#ffffff', '#e4e4e7', '#d4d4d8', '#a1a1aa', '#71717a'];
   const now = performance.now();
   for (let i = 0; i < count; i++) {
     confettiParticles.push({
@@ -329,13 +329,13 @@ function pageHero(eyebrow, title, subtitle) {
 
 /* ─── Home Screen ─── */
 const appCards = [
-  ['meditation', '◌', 'meditation', 'meditationSub', 'rgba(0,242,254,.35)'],
-  ['weather', '☼', 'weather', 'weatherSub', 'rgba(245,158,11,.35)'],
-  ['crypto', '◇', 'crypto', 'cryptoSub', 'rgba(121,40,202,.42)'],
-  ['language', '文', 'language', 'languageSub', 'rgba(16,185,129,.34)'],
-  ['real-estate', '⌂', 'estate', 'estateSub', 'rgba(245,158,11,.28)'],
-  ['quiz', '◎', 'quiz', 'quizSub', 'rgba(0,242,254,.3)'],
-  ['p2p', '⇄', 'p2p', 'p2pSub', 'rgba(121,40,202,.4)']
+  ['meditation', '◌', 'meditation', 'meditationSub', 'rgba(255,255,255,.14)'],
+  ['weather', '☼', 'weather', 'weatherSub', 'rgba(255,255,255,.14)'],
+  ['crypto', '◇', 'crypto', 'cryptoSub', 'rgba(255,255,255,.14)'],
+  ['language', '文', 'language', 'languageSub', 'rgba(255,255,255,.14)'],
+  ['real-estate', '⌂', 'estate', 'estateSub', 'rgba(255,255,255,.14)'],
+  ['quiz', '◎', 'quiz', 'quizSub', 'rgba(255,255,255,.14)'],
+  ['p2p', '⇄', 'p2p', 'p2pSub', 'rgba(255,255,255,.14)']
 ];
 
 function renderHome() {
@@ -670,7 +670,7 @@ async function renderWeather(cityName = 'Kyiv') {
   const cityEl = $('#wx-city');
   if (!cityEl) return;
 
-  cityEl.innerHTML = `${data.city} <small>${data.desc} · <span style="color:${data.live ? '#10b981' : '#f59e0b'}">${data.live ? t('liveApi') : t('demoData')}</span></small>`;
+  cityEl.innerHTML = `${data.city} <small>${data.desc} · <span style="color:${data.live ? '#ffffff' : '#a1a1aa'}">${data.live ? t('liveApi') : t('demoData')}</span></small>`;
   $('#wx-temp').innerHTML = `${data.temp}<sup>°</sup>`;
   $('#wx-symbol').textContent = data.icon;
   $('#wx-feels').textContent = `${data.feels}°`;
@@ -702,17 +702,17 @@ async function renderWeather(cityName = 'Kyiv') {
 
 /* ─── 3. Live Crypto Tracker (Binance Public Ticker) ─── */
 const coins = [
-  { s: 'BTC', n: 'Bitcoin', p: 68420.12, c: 2.84, color: '#f59e0b', pts: [7, 9, 8, 12, 11, 15, 14, 19, 18, 22] },
-  { s: 'ETH', n: 'Ethereum', p: 3891.44, c: 1.43, color: '#a78bfa', pts: [18, 15, 16, 14, 17, 13, 14, 11, 13, 10] },
-  { s: 'TON', n: 'Toncoin', p: 7.12, c: 4.78, color: '#00f2fe', pts: [16, 14, 15, 12, 11, 13, 9, 8, 5, 4] },
-  { s: 'SOL', n: 'Solana', p: 172.83, c: -1.26, color: '#10b981', pts: [7, 6, 9, 8, 12, 11, 14, 13, 17, 19] },
-  { s: 'BNB', n: 'BNB', p: 604.21, c: 0.64, color: '#facc15', pts: [18, 17, 14, 16, 12, 13, 10, 8, 9, 6] }
+  { s: 'BTC', n: 'Bitcoin', p: 68420.12, c: 2.84, color: '#ffffff', pts: [7, 9, 8, 12, 11, 15, 14, 19, 18, 22] },
+  { s: 'ETH', n: 'Ethereum', p: 3891.44, c: 1.43, color: '#d4d4d8', pts: [18, 15, 16, 14, 17, 13, 14, 11, 13, 10] },
+  { s: 'TON', n: 'Toncoin', p: 7.12, c: 4.78, color: '#a1a1aa', pts: [16, 14, 15, 12, 11, 13, 9, 8, 5, 4] },
+  { s: 'SOL', n: 'Solana', p: 172.83, c: -1.26, color: '#71717a', pts: [7, 6, 9, 8, 12, 11, 14, 13, 17, 19] },
+  { s: 'BNB', n: 'BNB', p: 604.21, c: 0.64, color: '#52525b', pts: [18, 17, 14, 16, 12, 13, 10, 8, 9, 6] }
 ];
 
 function spark(points, up) {
   const max = Math.max(...points), min = Math.min(...points);
   const pts = points.map((v, i) => `${i * 12.4},${34 - ((v - min) / (max - min || 1)) * 28}`).join(' ');
-  return `<svg class="spark" viewBox="0 0 112 38" aria-hidden="true"><polyline points="${pts}" fill="none" stroke="${up ? '#34d399' : '#fb7185'}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  return `<svg class="spark" viewBox="0 0 112 38" aria-hidden="true"><polyline points="${pts}" fill="none" stroke="${up ? '#ffffff' : '#71717a'}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 }
 
 async function fetchBinancePrices() {
@@ -731,7 +731,7 @@ function renderCrypto() {
     <section class="glass panel">
       <div class="section-title">
         <h2>${t('markets')}</h2>
-        <small id="crypto-live-badge"><span style="color:#34d399">●</span> ${t('updated')}</small>
+        <small id="crypto-live-badge"><span style="color:#ffffff">●</span> ${t('updated')}</small>
       </div>
       <div id="markets"></div>
     </section>
@@ -762,7 +762,7 @@ function renderCrypto() {
         <h2>${t('portfolio')}</h2>
         <div class="portfolio">
           <div class="donut"><span>${t('total')}<b>$24,860</b></span></div>
-          <div class="legend">${[['BTC', '#00f2fe', '48%'], ['ETH', '#a78bfa', '30%'], ['TON', '#10b981', '13%'], ['Other', '#f59e0b', '9%']].map(x => `
+          <div class="legend">${[['BTC', '#ffffff', '48%'], ['ETH', '#a1a1aa', '30%'], ['TON', '#71717a', '13%'], ['Other', '#3f3f46', '9%']].map(x => `
             <div class="legend-row"><span><i style="background:${x[1]}"></i>${x[0]}</span><b>${x[2]}</b></div>`).join('')}
           </div>
         </div>
@@ -804,7 +804,7 @@ function renderCrypto() {
     const liveTickers = await fetchBinancePrices();
     if (liveTickers && liveTickers.length) {
       const badge = $('#crypto-live-badge');
-      if (badge) badge.innerHTML = `<span style="color:#10b981">${t('liveApi')}</span> · Binance 24h`;
+      if (badge) badge.innerHTML = `<span style="color:#ffffff">${t('liveApi')}</span> · Binance 24h`;
       liveTickers.forEach(t => {
         const sym = t.symbol.replace('USDT', '');
         const target = coins.find(x => x.s === sym);
@@ -1000,8 +1000,8 @@ function renderEstate() {
         </div>
       </div>
       <div class="grid grid-2" style="border-top:1px solid var(--border);padding-top:12px">
-        <div class="calc-row"><span>${t('monthlyPay')}:</span><b id="calc-monthly" style="font-size:16px;color:#00f2fe">$13,540 / mo</b></div>
-        <div class="calc-row"><span>${t('estYield')}:</span><b id="calc-yield" style="font-size:16px;color:#10b981">7.07% ROI</b></div>
+        <div class="calc-row"><span>${t('monthlyPay')}:</span><b id="calc-monthly" style="font-size:16px;color:#ffffff">$13,540 / mo</b></div>
+        <div class="calc-row"><span>${t('estYield')}:</span><b id="calc-yield" style="font-size:16px;color:#d4d4d8">7.07% ROI</b></div>
       </div>
     </section>
 
@@ -1151,7 +1151,7 @@ function renderQuiz() {
       const cd = $('#countdown');
       if (cd) {
         cd.textContent = left;
-        if (left <= 4) cd.style.borderColor = '#fb7185';
+        if (left <= 4) cd.style.borderColor = '#ffffff';
       }
       if (left <= 0) {
         toast(t('timeUp'));
@@ -1243,7 +1243,7 @@ function renderP2P() {
           <button class="chip active" data-side="buy">${t('buyCrypto')}</button>
           <button class="chip" data-side="sell">${t('sellCrypto')}</button>
         </div>
-        <small><span style="color:#34d399">●</span> ESCROW ONLINE</small>
+        <small><span style="color:#ffffff">●</span> ESCROW ONLINE</small>
       </div>
       <div class="chips" id="pay-filter">
         <button class="chip active" data-method="all">${t('all')}</button>
@@ -1448,12 +1448,6 @@ document.addEventListener('pointerdown', e => {
   if (e.target.closest('button, a, .chip, .quiz-answer, .answer, .property, .market-row, .hour, .sound-toggle')) {
     playUiTick();
   }
-  const ripple = document.createElement('span');
-  ripple.className = 'click-shockwave';
-  ripple.style.left = `${e.clientX}px`;
-  ripple.style.top = `${e.clientY}px`;
-  document.body.appendChild(ripple);
-  setTimeout(() => ripple.remove(), 450);
 });
 
 document.addEventListener('click', e => {

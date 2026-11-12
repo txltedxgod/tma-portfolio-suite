@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-00f2fe?style=for-the-badge&logo=github&logoColor=white)](https://txltedxgod.github.io/tma-portfolio-suite/)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-ffffff?style=for-the-badge&logo=github&logoColor=09090b)](https://txltedxgod.github.io/tma-portfolio-suite/)
 [![Telegram WebApp](https://img.shields.io/badge/Telegram-WebApp_SDK_v7+-24A1DE?style=for-the-badge&logo=telegram&logoColor=white)](https://core.telegram.org/bots/webapps)
 [![aiogram 3.x](https://img.shields.io/badge/Backend-aiogram_3.x-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://github.com/aiogram/aiogram)
 [![Web3 Payments](https://img.shields.io/badge/Crypto-CryptoBot_·_xRocket_·_Stars-F59E0B?style=for-the-badge&logo=bitcoin&logoColor=white)](https://t.me/CryptoBot)
@@ -14,6 +14,17 @@
 [👉 **EXPLORE LIVE INTERACTIVE DEMO** 👈](https://txltedxgod.github.io/tma-portfolio-suite/)
 
 </div>
+
+---
+
+## 🎬 Feature Demo
+
+<p align="center">
+  <img src="assets/demo.gif" alt="TMA Portfolio Suite Feature Demo" width="840" />
+</p>
+<p align="center">
+  <sub><a href="assets/demo.mp4">Download 1080p60 MP4</a></sub>
+</p>
 
 ---
 
@@ -58,7 +69,7 @@ This suite is architected for instant plug-and-play integration with Telegram's 
 
 ## 🎨 Design System & Architecture
 
-- **Dark Glassmorphism Aesthetics**: Deep dark background (`#08090C`), frosted glass cards (`backdrop-filter: blur(24px)`), subtle neon glow accents (`#00f2fe`, `#7928ca`, `#10b981`).
+- **Obsidian Monochrome Aesthetics**: Deep charcoal background (`#09090B`), soft slate surface transitions (`#101217`), crisp hairline borders (`rgba(255, 255, 255, 0.09)`), and pure monochrome accents (`#FFFFFF`, `#D4D4D8`, `#A1A1AA`).
 - **Telegram Native UX**:
   - Seamless full-screen expansion (`Telegram.WebApp.expand()`).
   - Haptic Feedback integration (`Telegram.WebApp.HapticFeedback.impactOccurred('light' | 'medium')`).
